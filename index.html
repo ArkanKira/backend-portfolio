@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkan Reda | Backend Software Engineer & Node.js Specialist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        wine: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519',
+                        },
+                        crimson: {
+                            DEFAULT: '#dc2626',
+                            glow: '#ef4444',
+                            dark: '#991b1b',
+                            darker: '#450a0a'
+                        },
+                        dark: {
+                            base: '#080808',
+                            surface: '#121214',
+                            card: '#18181b',
+                            border: '#27272a',
+                            hover: '#202023'
+                        }
+                    },
+                    boxShadow: {
+                        'crimson-glow': '0 0 25px -5px rgba(220, 38, 38, 0.35)',
+                        'wine-glow': '0 0 30px -5px rgba(159, 18, 57, 0.4)',
+                        'inner-glow': 'inset 0 0 15px rgba(220, 38, 38, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #080808;
+            color: #f4f4f5;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom Crimson Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #450a0a;
+            border-radius: 4px;
+            border: 1px solid #7f1d1d;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #991b1b;
+        }
+
+        .crimson-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #f87171 50%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .wine-gradient-bg {
+            background: linear-gradient(135deg, rgba(153, 27, 27, 0.2) 0%, rgba(24, 24, 27, 0.8) 100%);
+        }
+
+        .glow-border {
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glow-border:hover {
+            border-color: rgba(220, 38, 38, 0.6);
+            box-shadow: 0 0 20px -3px rgba(220, 38, 38, 0.25);
+        }
+
+        .code-syntax-keyword { color: #f43f5e; font-weight: 600; }
+        .code-syntax-string { color: #34d399; }
+        .code-syntax-func { color: #60a5fa; }
+        .code-syntax-comment { color: #71717a; font-style: italic; }
+        .code-syntax-json-key { color: #f87171; }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-crimson selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Dark Red Background Effects -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-wine-900/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-1/3 right-10 w-[30rem] h-[30rem] bg-crimson-darker/20 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
+    <header class="fixed top-0 left-0 w-full bg-dark-base/80 backdrop-blur-xl border-b border-dark-border/80 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-lg bg-wine-950 border border-wine-700/50 flex items-center justify-center group-hover:border-crimson group-hover:shadow-crimson-glow transition-all">
+                    <i class="fa-solid fa-terminal text-crimson text-lg group-hover:scale-110 transition-transform"></i>
+                </div>
+                <span class="font-mono font-bold text-lg text-white tracking-wider">
+                    &lt;<span class="text-crimson">ArkanReda</span>.dev /&gt;
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+                <a href="#about" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-user text-xs text-wine-500"></i> About</a>
+                <a href="#skills" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-xs text-wine-500"></i> Skills</a>
+                <a href="#experience" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-xs text-wine-500"></i> Experience</a>
+                <a href="#projects" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-code text-xs text-wine-500"></i> Projects</a>
+                <a href="#playground" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial text-xs text-wine-500"></i> API Tester</a>
+                <a href="#contact" class="hover:text-crimson transition-colors flex items-center gap-1.5"><i class="fa-solid fa-paper-plane text-xs text-wine-500"></i> Contact</a>
+            </nav>
+
+            <!-- Availability Status Badge -->
+            <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-wine-950/80 border border-wine-800/60 text-xs font-medium text-zinc-200">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                Available for Intern / Junior Roles
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-zinc-400 hover:text-white p-2 rounded-lg bg-dark-card border border-dark-border">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-surface border-b border-dark-border px-6 py-6 space-y-4">
+            <a href="#about" class="mobile-nav-link block text-zinc-300 hover:text-crimson">About</a>
+            <a href="#skills" class="mobile-nav-link block text-zinc-300 hover:text-crimson">Skills</a>
+            <a href="#experience" class="mobile-nav-link block text-zinc-300 hover:text-crimson">Experience</a>
+            <a href="#projects" class="mobile-nav-link block text-zinc-300 hover:text-crimson">Projects</a>
+            <a href="#playground" class="mobile-nav-link block text-zinc-300 hover:text-crimson">API Playground</a>
+            <a href="#contact" class="mobile-nav-link block text-zinc-300 hover:text-crimson">Contact</a>
+            <div class="pt-2 border-t border-dark-border flex items-center gap-2 text-xs text-zinc-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Available for Backend Developer opportunities
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Bio & Intro -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+                
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-wine-950/60 border border-wine-800/80 text-wine-300 text-xs font-mono font-medium tracking-wide">
+                    <i class="fa-solid fa-server text-crimson"></i> BACKEND ENGINEER & NODE.JS SPECIALIST
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Engineering Robust <br>
+                    <span class="crimson-gradient-text">Server Architectures</span> & APIs
+                </h1>
+
+                <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
+                    I am <strong class="text-zinc-200">Arkan Reda</strong>, a 3rd-Year Business Technology Student at Canadian International College (CIC). I specialize in designing and building scalable RESTful APIs, clean backend architectures, and database models using <span class="text-crimson font-semibold">Node.js</span>, <span class="text-crimson font-semibold">Express.js</span>, <span class="text-zinc-200 font-semibold">MongoDB</span>, and <span class="text-zinc-200 font-semibold">MySQL</span>.
+                </p>
+
+                <!-- Key Value Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                    <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center gap-3">
+                        <i class="fa-brands fa-node-js text-2xl text-emerald-500"></i>
+                        <div>
+                            <div class="text-xs text-zinc-400">Core Stack</div>
+                            <div class="text-sm font-semibold text-white">Node / Express</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center gap-3">
+                        <i class="fa-solid fa-database text-2xl text-wine-400"></i>
+                        <div>
+                            <div class="text-xs text-zinc-400">Databases</div>
+                            <div class="text-sm font-semibold text-white">MongoDB & MySQL</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center gap-3 col-span-2 sm:col-span-1">
+                        <i class="fa-solid fa-diagram-project text-2xl text-crimson"></i>
+                        <div>
+                            <div class="text-xs text-zinc-400">Architecture</div>
+                            <div class="text-sm font-semibold text-white">RESTful APIs & MVC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#playground" class="px-6 py-3.5 rounded-xl bg-crimson hover:bg-wine-600 text-white font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-crimson-glow">
+                        <i class="fa-solid fa-terminal"></i> Try Live API Playground
+                    </a>
+                    <a href="#contact" class="px-6 py-3.5 rounded-xl bg-dark-card hover:bg-dark-hover border border-dark-border text-zinc-200 font-semibold text-sm transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-envelope text-wine-500"></i> Get In Touch
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Interactive Code Window -->
+            <div class="lg:col-span-5">
+                <div class="rounded-2xl bg-dark-card border border-wine-900/60 shadow-2xl overflow-hidden glow-border">
+                    <!-- Window Header -->
+                    <div class="bg-dark-surface px-4 py-3 border-b border-dark-border flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                            <span class="ml-2 font-mono text-xs text-zinc-400">server.js - Express App</span>
+                        </div>
+                        <span class="text-xs font-mono text-wine-400"><i class="fa-solid fa-circle text-[8px] mr-1 text-emerald-500"></i> HTTP/1.1 200 OK</span>
+                    </div>
+
+                    <!-- Code Body -->
+                    <div class="p-5 font-mono text-xs leading-relaxed overflow-x-auto text-zinc-300 space-y-1">
+                        <div><span class="code-syntax-keyword">const</span> express = <span class="code-syntax-func">require</span>(<span class="code-syntax-string">'express'</span>);</div>
+                        <div><span class="code-syntax-keyword">const</span> app = <span class="code-syntax-func">express</span>();</div>
+                        <div><span class="code-syntax-keyword">const</span> PORT = process.env.PORT || <span class="text-amber-400">5000</span>;</div>
+                        <br>
+                        <div class="code-syntax-comment">// Middleware & RESTful Route Setup</div>
+                        <div>app.<span class="code-syntax-func">use</span>(express.<span class="code-syntax-func">json</span>());</div>
+                        <br>
+                        <div class="code-syntax-comment">// Health Check Endpoint</div>
+                        <div>app.<span class="code-syntax-func">get</span>(<span class="code-syntax-string">'/api/v1/health'</span>, (req, res) => {</div>
+                        <div class="pl-4">res.<span class="code-syntax-func">status</span>(<span class="text-amber-400">200</span>).<span class="code-syntax-func">json</span>({</div>
+                        <div class="pl-8"><span class="code-syntax-json-key">developer</span>: <span class="code-syntax-string">'Arkan Reda'</span>,</div>
+                        <div class="pl-8"><span class="code-syntax-json-key">role</span>: <span class="code-syntax-string">'Backend Software Engineer'</span>,</div>
+                        <div class="pl-8"><span class="code-syntax-json-key">status</span>: <span class="code-syntax-string">'Ready to scale & deploy'</span>,</div>
+                        <div class="pl-8"><span class="code-syntax-json-key">stack</span>: [<span class="code-syntax-string">'Node.js'</span>, <span class="code-syntax-string">'Express'</span>, <span class="code-syntax-string">'MongoDB'</span>, <span class="code-syntax-string">'MySQL'</span>]</div>
+                        <div class="pl-4">});</div>
+                        <div>});</div>
+                        <br>
+                        <div>app.<span class="code-syntax-func">listen</span>(PORT, () => {</div>
+                        <div class="pl-4">console.<span class="code-syntax-func">log</span>(<span class="code-syntax-string">`🚀 Server active on port ${PORT}`</span>);</div>
+                        <div>});</div>
+                    </div>
+
+                    <!-- Footer status indicator inside mockup -->
+                    <div class="bg-wine-950/40 px-4 py-2 border-t border-wine-900/40 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                        <span>Terminal Output: </span>
+                        <span class="text-emerald-400 font-semibold">[LOG] Database connected successfully</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-dark-surface border-y border-dark-border px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-crimson font-mono text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-crimson-darker/40 border border-wine-900">Tech Stack & Competencies</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Backend Engineering Core Skills</h2>
+                <p class="text-zinc-400 mt-2 text-sm">Specialized technical stack focused on server-side architecture, data persistence, and RESTful web services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Skill Card 1: Backend Core -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-wine-950 border border-wine-800/80 flex items-center justify-center text-crimson text-xl">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Backend Engineering</h3>
+                            <p class="text-xs text-zinc-400">Server Architecture & Logic</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-brands fa-node-js text-emerald-500 mr-2"></i>Node.js</span>
+                            <span class="text-wine-400 font-mono">Advanced Core</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-bolt text-amber-500 mr-2"></i>Express.js Framework</span>
+                            <span class="text-wine-400 font-mono">Routing & Middleware</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-network-wired text-sky-400 mr-2"></i>RESTful APIs</span>
+                            <span class="text-wine-400 font-mono">Clean Endpoints</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-gears text-purple-400 mr-2"></i>MVC Architecture</span>
+                            <span class="text-wine-400 font-mono">Structured Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2: Databases -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-wine-950 border border-wine-800/80 flex items-center justify-center text-crimson text-xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Databases & Storage</h3>
+                            <p class="text-xs text-zinc-400">Relational & NoSQL</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-leaf text-emerald-500 mr-2"></i>MongoDB</span>
+                            <span class="text-wine-400 font-mono">Mongoose ORM</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-table text-blue-500 mr-2"></i>MySQL</span>
+                            <span class="text-wine-400 font-mono">Relational Schemas & SQL</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-diagram-nested text-amber-400 mr-2"></i>Schema Design</span>
+                            <span class="text-wine-400 font-mono">Structured Models</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-filter text-rose-400 mr-2"></i>Data Filtering & Queries</span>
+                            <span class="text-wine-400 font-mono">Optimized</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3: Programming & Logic -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-wine-950 border border-wine-800/80 flex items-center justify-center text-crimson text-xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Programming Fundamentals</h3>
+                            <p class="text-xs text-zinc-400">Languages & Problem Solving</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-brands fa-js text-yellow-400 mr-2"></i>JavaScript</span>
+                            <span class="text-wine-400 font-mono">ES6+ Standard</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-c text-sky-500 mr-2"></i>C++ Programming</span>
+                            <span class="text-wine-400 font-mono">OOP & Algorithms</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-cube text-indigo-400 mr-2"></i>OOP Principles</span>
+                            <span class="text-wine-400 font-mono">Encapsulation & Design</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs">
+                            <span class="text-zinc-200 font-medium"><i class="fa-solid fa-brain text-pink-400 mr-2"></i>Problem Solving</span>
+                            <span class="text-wine-400 font-mono">Algorithmic Logic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4: Tools & Version Control -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-wine-950 border border-wine-800/80 flex items-center justify-center text-crimson text-xl">
+                            <i class="fa-solid fa-wrench"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Tools & Workflow</h3>
+                            <p class="text-xs text-zinc-400">Environment & Versioning</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-300"><i class="fa-brands fa-git-alt text-orange-500 mr-1.5"></i>Git</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-300"><i class="fa-brands fa-github text-white mr-1.5"></i>GitHub</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-300"><i class="fa-solid fa-code text-blue-400 mr-1.5"></i>VS Code</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-300"><i class="fa-solid fa-paper-plane text-amber-500 mr-1.5"></i>Postman</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-300"><i class="fa-solid fa-terminal text-emerald-400 mr-1.5"></i>CLI / Bash</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 5: Frontend Integration -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-wine-950 border border-wine-800/80 flex items-center justify-center text-crimson text-xl">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Frontend Fundamentals & Integration</h3>
+                            <p class="text-xs text-zinc-400">Supporting skills for full API integration</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                        Proficient in frontend basics to seamlessly collaborate with client-side engineers, construct dynamic dashboards, and perform REST API integrations.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-200"><i class="fa-brands fa-react text-sky-400 mr-1.5"></i>React.js</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-200"><i class="fa-solid fa-wind text-teal-400 mr-1.5"></i>Tailwind CSS</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-200"><i class="fa-brands fa-html5 text-orange-500 mr-1.5"></i>HTML5</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-base border border-dark-border text-xs font-mono text-zinc-200"><i class="fa-brands fa-css3-alt text-blue-500 mr-1.5"></i>CSS3</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-crimson font-mono text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-crimson-darker/40 border border-wine-900">Career Progress</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Practical Experience & Training</h2>
+            <p class="text-zinc-400 mt-2 text-sm">Hands-on technical internships and teamwork in real software development environments.</p>
+        </div>
+
+        <div class="relative border-l-2 border-wine-900/80 ml-4 md:ml-32 space-y-12">
+            
+            <!-- Timeline Item 1 -->
+            <div class="relative pl-8 group">
+                <!-- Timeline Dot -->
+                <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-dark-base border-2 border-crimson flex items-center justify-center shadow-crimson-glow">
+                    <span class="w-2.5 h-2.5 rounded-full bg-crimson"></span>
+                </div>
+
+                <!-- Date badge (Desktop) -->
+                <div class="hidden md:block absolute -left-36 top-2 font-mono text-xs text-wine-400 font-semibold text-right w-28">
+                    Tech Internship
+                </div>
+
+                <!-- Experience Card -->
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border glow-border">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                                Backend Developer Intern 
+                                <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-crimson-darker text-wine-200 border border-wine-800">Tech Mastery</span>
+                            </h3>
+                            <p class="text-xs text-zinc-400 mt-1">Hands-on Backend Internship & Agile Teamwork</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-2.5 text-xs text-zinc-300 leading-relaxed mt-4">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-crimson mt-0.5"></i>
+                            <span>Collaborated with a cross-functional development team to design, build, and deploy backend architectures and RESTful web APIs.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-crimson mt-0.5"></i>
+                            <span>Implemented database schemas and relational data models utilizing <strong>MongoDB</strong> (NoSQL) and <strong>MySQL</strong> (Relational).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-crimson mt-0.5"></i>
+                            <span>Engineered backend business logic using <strong>Node.js</strong> and <strong>Express.js</strong> for multiple production-grade web applications.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-crimson mt-0.5"></i>
+                            <span>Utilized <strong>Git / GitHub</strong> for team collaboration, feature branching, pull requests, and version control.</span>
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-2 mt-5 pt-4 border-t border-dark-border">
+                        <span class="px-2.5 py-1 rounded bg-wine-950/80 border border-wine-800/60 text-[11px] font-mono text-zinc-300">Node.js</span>
+                        <span class="px-2.5 py-1 rounded bg-wine-950/80 border border-wine-800/60 text-[11px] font-mono text-zinc-300">Express.js</span>
+                        <span class="px-2.5 py-1 rounded bg-wine-950/80 border border-wine-800/60 text-[11px] font-mono text-zinc-300">MongoDB</span>
+                        <span class="px-2.5 py-1 rounded bg-wine-950/80 border border-wine-800/60 text-[11px] font-mono text-zinc-300">MySQL</span>
+                        <span class="px-2.5 py-1 rounded bg-wine-950/80 border border-wine-800/60 text-[11px] font-mono text-zinc-300">Git/GitHub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2: Education -->
+            <div class="relative pl-8 group">
+                <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-dark-base border-2 border-wine-700 flex items-center justify-center">
+                    <span class="w-2.5 h-2.5 rounded-full bg-wine-500"></span>
+                </div>
+
+                <div class="hidden md:block absolute -left-36 top-2 font-mono text-xs text-zinc-400 font-semibold text-right w-28">
+                    2024 - Present
+                </div>
+
+                <div class="bg-dark-card rounded-2xl p-6 border border-dark-border">
+                    <h3 class="text-xl font-bold text-white">Canadian International College (CIC)</h3>
+                    <p class="text-xs text-crimson font-medium mt-1">Bachelor's Degree in Business Technology (Business Information Systems) – <strong>Third-Year Student (3rd Year)</strong></p>
+                    <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+                        Focusing on Software Engineering concepts, Information Systems, Business Logic, System Analysis, Data Structures, and Database Management Systems.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-dark-surface border-y border-dark-border px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-crimson font-mono text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-crimson-darker/40 border border-wine-900">Portfolio Work</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Featured Web Projects</h2>
+                <p class="text-zinc-400 mt-2 text-sm">Detailed backend architectures built with team collaboration during technical internship.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1: E-Commerce API -->
+                <div class="bg-dark-card rounded-2xl border border-dark-border p-6 flex flex-col justify-between glow-border relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-crimson/5 rounded-bl-full pointer-events-none group-hover:bg-crimson/10 transition-colors"></div>
+                    
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-wine-950 text-crimson border border-wine-800">E-Commerce Platform</span>
+                            <span class="text-xs text-zinc-400 font-mono"><i class="fa-solid fa-users mr-1 text-wine-400"></i> Team Project</span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-crimson transition-colors">E-Commerce Backend API</h3>
+                        <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+                            Designed and implemented the full backend web server and database architecture for an online shopping platform.
+                        </p>
+
+                        <div class="space-y-2 mb-6">
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>RESTful APIs for user authentication, product catalog management, and shopping cart operations.</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>MongoDB schema models for products, user accounts, and cart state handling.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Express.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">MongoDB</span>
+                        </div>
+                        <a href="#playground" class="w-full py-2.5 rounded-lg bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 text-xs font-semibold text-zinc-200 transition text-center block">
+                            <i class="fa-solid fa-play text-crimson mr-1"></i> Test Endpoints in Playground
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Job Board Platform -->
+                <div class="bg-dark-card rounded-2xl border border-dark-border p-6 flex flex-col justify-between glow-border relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-wine-900/10 rounded-bl-full pointer-events-none group-hover:bg-wine-900/20 transition-colors"></div>
+                    
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-wine-950 text-crimson border border-wine-800">Employment Platform</span>
+                            <span class="text-xs text-zinc-400 font-mono"><i class="fa-solid fa-users mr-1 text-wine-400"></i> Team Project</span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-crimson transition-colors">Job Board Platform Backend</h3>
+                        <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+                            Comprehensive web backend enabling employers to publish job listings and candidates to apply with structured relational data storage.
+                        </p>
+
+                        <div class="space-y-2 mb-6">
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>Role-based access handling for Employers vs Job Applicants.</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>Relational MySQL queries for job search, category filtering, and application status tracking.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Express.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">MySQL</span>
+                        </div>
+                        <a href="#playground" class="w-full py-2.5 rounded-lg bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 text-xs font-semibold text-zinc-200 transition text-center block">
+                            <i class="fa-solid fa-play text-crimson mr-1"></i> Test Endpoints in Playground
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Leo Clinic Healthcare -->
+                <div class="bg-dark-card rounded-2xl border border-dark-border p-6 flex flex-col justify-between glow-border relative overflow-hidden group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-wine-950 text-crimson border border-wine-800">Healthcare System</span>
+                            <span class="text-xs text-zinc-400 font-mono"><i class="fa-solid fa-users mr-1 text-wine-400"></i> Team Project</span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-crimson transition-colors">Leo Clinic Booking Platform</h3>
+                        <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+                            Healthcare reservation system backend inspired by Vezeeta, built for managing doctor schedules and patient appointments.
+                        </p>
+
+                        <div class="space-y-2 mb-6">
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>Doctor schedule calendar availability management and patient reservation backend logic.</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                <span>Appointment status tracking services (Pending, Confirmed, Cancelled).</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Express.js</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">REST APIs</span>
+                        </div>
+                        <a href="#playground" class="w-full py-2.5 rounded-lg bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 text-xs font-semibold text-zinc-200 transition text-center block">
+                            <i class="fa-solid fa-play text-crimson mr-1"></i> Test Endpoints in Playground
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: C++ Logic & Utilities -->
+                <div class="bg-dark-card rounded-2xl border border-dark-border p-6 flex flex-col justify-between glow-border relative overflow-hidden group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-wine-950 text-crimson border border-wine-800">C++ Software</span>
+                            <span class="text-xs text-zinc-400 font-mono"><i class="fa-solid fa-user mr-1 text-wine-400"></i> Individual</span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-crimson transition-colors">C++ Logic & System Utilities</h3>
+                        <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+                            Core programming software applications demonstrating foundational algorithmic problem solving and OOP logic.
+                        </p>
+
+                        <div class="space-y-2 mb-6">
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-gamepad text-crimson mt-0.5"></i>
+                                <span><strong>XO Game:</strong> 2-player game with win-condition detection, input validation, and game replay logic.</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-300 flex items-start gap-2">
+                                <i class="fa-solid fa-calculator text-amber-500 mt-0.5"></i>
+                                <span><strong>Todo List & Calculator:</strong> Modular CLI tools focusing on OOP principles and clean memory structure.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">C++</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">OOP</span>
+                            <span class="px-2.5 py-1 rounded bg-wine-950 text-xs font-mono text-wine-300 border border-wine-800">Algorithms</span>
+                        </div>
+                        <div class="py-2.5 px-3 rounded-lg bg-dark-base border border-dark-border text-xs text-zinc-400 text-center font-mono">
+                            Demonstrates Strong CS Fundamentals
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="playground" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-crimson font-mono text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-crimson-darker/40 border border-wine-900">Interactive Live Feature</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Simulated REST API Tester</h2>
+            <p class="text-zinc-400 mt-2 text-sm">Click any endpoint below to send a live simulated HTTP request and observe the backend response formatted in real-time.</p>
+        </div>
+
+        <!-- API Playground Interface Container -->
+        <div class="bg-dark-card rounded-2xl border border-wine-900/80 shadow-2xl overflow-hidden glow-border">
+            
+            <!-- Console Topbar -->
+            <div class="bg-dark-surface px-6 py-4 border-b border-dark-border flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-crimson"></div>
+                    <span class="font-mono text-sm font-bold text-white">Postman / API Console Simulator</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-xs text-zinc-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Server Status: HTTP 200 Ready</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- Left Endpoint Selection Buttons -->
+                <div class="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-dark-border space-y-3 bg-dark-surface/40">
+                    <div class="text-xs font-mono font-semibold text-zinc-400 mb-2 uppercase tracking-wider">Select Endpoint to Test:</div>
+
+                    <button onclick="runApiTest('get_products')" class="api-btn w-full text-left p-3 rounded-xl bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 transition flex items-center justify-between group active-api" id="btn-get_products">
+                        <div>
+                            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold mr-2">GET</span>
+                            <span class="font-mono text-xs text-zinc-200">/api/v1/products</span>
+                        </div>
+                        <i class="fa-solid fa-play text-xs text-zinc-500 group-hover:text-crimson"></i>
+                    </button>
+
+                    <button onclick="runApiTest('get_jobs')" class="api-btn w-full text-left p-3 rounded-xl bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 transition flex items-center justify-between group" id="btn-get_jobs">
+                        <div>
+                            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold mr-2">GET</span>
+                            <span class="font-mono text-xs text-zinc-200">/api/v1/jobs?role=backend</span>
+                        </div>
+                        <i class="fa-solid fa-play text-xs text-zinc-500 group-hover:text-crimson"></i>
+                    </button>
+
+                    <button onclick="runApiTest('book_appointment')" class="api-btn w-full text-left p-3 rounded-xl bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 transition flex items-center justify-between group" id="btn-book_appointment">
+                        <div>
+                            <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 text-[10px] font-mono font-bold mr-2">POST</span>
+                            <span class="font-mono text-xs text-zinc-200">/api/v1/appointments/book</span>
+                        </div>
+                        <i class="fa-solid fa-play text-xs text-zinc-500 group-hover:text-crimson"></i>
+                    </button>
+
+                    <button onclick="runApiTest('health')" class="api-btn w-full text-left p-3 rounded-xl bg-dark-base hover:bg-wine-950 border border-dark-border hover:border-wine-800 transition flex items-center justify-between group" id="btn-health">
+                        <div>
+                            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold mr-2">GET</span>
+                            <span class="font-mono text-xs text-zinc-200">/api/v1/health</span>
+                        </div>
+                        <i class="fa-solid fa-play text-xs text-zinc-500 group-hover:text-crimson"></i>
+                    </button>
+                </div>
+
+                <!-- Right JSON Response Viewer -->
+                <div class="lg:col-span-7 p-6 bg-dark-base font-mono text-xs min-h-[320px] flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 pb-2 border-b border-dark-border text-zinc-400">
+                            <span id="api-response-status" class="text-emerald-400 font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> 200 OK (24ms)</span>
+                            <span id="api-content-type" class="text-zinc-500">Content-Type: application/json</span>
+                        </div>
+
+                        <!-- JSON Output -->
+                        <pre id="api-response-json" class="text-zinc-300 leading-relaxed overflow-x-auto whitespace-pre-wrap font-mono">
+{
+  "status": "success",
+  "data": {
+    "products": [
+      { "id": "prod_01", "name": "Mechanical Keyboard", "price": 89.99, "stock": 14 },
+      { "id": "prod_02", "name": "Developer Monitor 27\"", "price": 299.99, "stock": 5 }
+    ]
+  }
+}
+                        </pre>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-dark-border flex justify-between items-center text-[11px] text-zinc-500">
+                        <span>Executed on Express.js Virtual Node Engine</span>
+                        <span class="text-crimson"><i class="fa-solid fa-bolt mr-1"></i> Dynamic Simulation</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-dark-surface border-t border-dark-border px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Info -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-crimson font-mono text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-crimson-darker/40 border border-wine-900">Get In Touch</span>
+                        <h2 class="text-3xl font-bold text-white mt-3">Let's Connect & Build</h2>
+                        <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+                            I am actively seeking <strong class="text-zinc-200">Backend Developer Internships</strong> and <strong class="text-zinc-200">Junior Backend Roles</strong>. Feel free to contact me via email, phone, or LinkedIn!
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-dark-card border border-dark-border flex items-center gap-4 glow-border">
+                            <div class="w-10 h-10 rounded-lg bg-wine-950 border border-wine-800 flex items-center justify-center text-crimson text-lg">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-zinc-400">Email Address</div>
+                                <a href="mailto:arkanbasha140@gmail.com" class="text-sm font-semibold text-white hover:text-crimson transition">arkanbasha140@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-dark-card border border-dark-border flex items-center gap-4 glow-border">
+                            <div class="w-10 h-10 rounded-lg bg-wine-950 border border-wine-800 flex items-center justify-center text-crimson text-lg">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-zinc-400">Phone & WhatsApp</div>
+                                <a href="tel:01007821912" class="text-sm font-semibold text-white hover:text-crimson transition">01007821912</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-dark-card border border-dark-border flex items-center gap-4 glow-border">
+                            <div class="w-10 h-10 rounded-lg bg-wine-950 border border-wine-800 flex items-center justify-center text-crimson text-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-zinc-400">Location</div>
+                                <div class="text-sm font-semibold text-white">Cairo, Egypt</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 pt-2">
+                        <a href="https://www.linkedin.com/in/arkan-reda-5" target="_blank" class="w-10 h-10 rounded-lg bg-dark-card hover:bg-wine-950 border border-dark-border hover:border-wine-800 text-zinc-300 hover:text-crimson flex items-center justify-center transition">
+                            <i class="fa-brands fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-lg bg-dark-card hover:bg-wine-950 border border-dark-border hover:border-wine-800 text-zinc-300 hover:text-crimson flex items-center justify-center transition">
+                            <i class="fa-brands fa-github text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Message Form Mockup -->
+                <div class="lg:col-span-7">
+                    <div class="bg-dark-card rounded-2xl p-6 sm:p-8 border border-dark-border glow-border">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            Send Direct Message
+                            <span class="text-xs font-mono font-normal text-zinc-400">(Triggers Simulated Backend Endpoint)</span>
+                        </h3>
+
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">Your Name</label>
+                                <input type="text" required placeholder="e.g. Recruiter / Hiring Manager" class="w-full px-4 py-3 rounded-xl bg-dark-base border border-dark-border text-zinc-200 text-xs focus:outline-none focus:border-crimson transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">Your Email</label>
+                                <input type="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-dark-base border border-dark-border text-zinc-200 text-xs focus:outline-none focus:border-crimson transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">Message Body</label>
+                                <textarea rows="4" required placeholder="Hello Arkan, we are interested in discussing a Backend opportunity..." class="w-full px-4 py-3 rounded-xl bg-dark-base border border-dark-border text-zinc-200 text-xs focus:outline-none focus:border-crimson transition resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" id="form-submit-btn" class="w-full py-3.5 rounded-xl bg-crimson hover:bg-wine-600 text-white font-semibold text-xs transition shadow-crimson-glow flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Dispatch Payload (Send Message)
+                            </button>
+
+                            <div id="form-success-alert" class="hidden p-3 rounded-lg bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-xs font-mono">
+                                <i class="fa-solid fa-circle-check mr-1"></i> HTTP 201: Message payload received successfully! I will reply shortly.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="mt-20 pt-8 border-t border-dark-border text-center text-xs text-zinc-500 font-mono">
+                <p>&copy; 2026 Arkan Reda. Engineered with Node.js mindsets, Tailwind CSS & Crimson Themes.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // API Tester Interactive Simulator Data
+        const apiMockResponses = {
+            get_products: {
+                status: "200 OK (18ms)",
+                json: `{
+  "status": "success",
+  "results": 2,
+  "data": {
+    "products": [
+      {
+        "_id": "64f1a280c9e1",
+        "title": "Backend Engineering Handbook",
+        "price": 49.99,
+        "category": "Education",
+        "inStock": true
+      },
+      {
+        "_id": "64f1a280c9e2",
+        "title": "Node.js REST API Masterclass",
+        "price": 29.99,
+        "category": "Courses",
+        "inStock": true
+      }
+    ]
+  }
+}`
+            },
+            get_jobs: {
+                status: "200 OK (32ms)",
+                json: `{
+  "status": "success",
+  "query": { "role": "backend", "location": "Cairo" },
+  "data": {
+    "jobs": [
+      {
+        "id": 101,
+        "title": "Junior Backend Developer",
+        "company": "Tech Solutions",
+        "stack": ["Node.js", "Express", "MySQL"],
+        "status": "Active"
+      }
+    ]
+  }
+}`
+            },
+            book_appointment: {
+                status: "201 Created (45ms)",
+                json: `{
+  "status": "success",
+  "message": "Appointment booked successfully at Leo Clinic",
+  "booking": {
+    "bookingId": "LC-99012",
+    "doctorName": "Dr. Ahmed Hassan",
+    "patientName": "Arkan Reda",
+    "date": "2026-10-15T10:00:00Z",
+    "status": "Confirmed"
+  }
+}`
+            },
+            health: {
+                status: "200 OK (5ms)",
+                json: `{
+  "status": "UP",
+  "uptime": "99.98%",
+  "timestamp": "${new Date().toISOString()}",
+  "environment": "Production",
+  "developer": "Arkan Reda"
+}`
+            }
+        };
+
+        function runApiTest(endpointKey) {
+            const jsonElem = document.getElementById('api-response-json');
+            const statusElem = document.getElementById('api-response-status');
+            
+            // Remove active classes
+            document.querySelectorAll('.api-btn').forEach(btn => {
+                btn.classList.remove('border-wine-800', 'bg-wine-950');
+            });
+
+            // Highlight active button
+            const activeBtn = document.getElementById(`btn-${endpointKey}`);
+            if(activeBtn) {
+                activeBtn.classList.add('border-wine-800', 'bg-wine-950');
+            }
+
+            // Animate response update
+            jsonElem.style.opacity = '0.3';
+            setTimeout(() => {
+                statusElem.innerHTML = `<i class="fa-solid fa-circle text-[8px] mr-1"></i> ${apiMockResponses[endpointKey].status}`;
+                jsonElem.innerText = apiMockResponses[endpointKey].json;
+                jsonElem.style.opacity = '1';
+            }, 150);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('form-submit-btn');
+            const alertBox = document.getElementById('form-success-alert');
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Dispatching Payload...`;
+
+            setTimeout(() => {
+                btn.classList.add('hidden');
+                alertBox.classList.remove('hidden');
+            }, 800);
+        }
+    </script>
+</body>
+</html>
